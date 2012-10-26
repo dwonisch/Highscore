@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighScore", "HighScore\HighScore.csproj", "{40D8B1C8-EADE-479D-AA65-FFA13F76AA28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighScore.Data", "HighScore.Data\HighScore.Data.csproj", "{C4D47574-44AD-4611-869F-9BDB08A1BAD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighScore.Logic", "HighScore.Logic\HighScore.Logic.csproj", "{2390FE0B-1682-4A7A-BFBF-FEA0CEA2C85E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40D8B1C8-EADE-479D-AA65-FFA13F76AA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D8B1C8-EADE-479D-AA65-FFA13F76AA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D8B1C8-EADE-479D-AA65-FFA13F76AA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D8B1C8-EADE-479D-AA65-FFA13F76AA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D47574-44AD-4611-869F-9BDB08A1BAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D47574-44AD-4611-869F-9BDB08A1BAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D47574-44AD-4611-869F-9BDB08A1BAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D47574-44AD-4611-869F-9BDB08A1BAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2390FE0B-1682-4A7A-BFBF-FEA0CEA2C85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2390FE0B-1682-4A7A-BFBF-FEA0CEA2C85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2390FE0B-1682-4A7A-BFBF-FEA0CEA2C85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2390FE0B-1682-4A7A-BFBF-FEA0CEA2C85E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

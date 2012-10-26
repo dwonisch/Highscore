@@ -1,0 +1,16 @@
+﻿<Window x:Class="HighScore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:HighScore"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <local:Calendar ItemsSource="{Binding  Days}" ItemDoubleClick="{Binding DaySelected}">
+
+        </local:Calendar>
+        <ContentControl Height="50" Grid.Row="1" x:Name="contentControl" Content="{Binding ContentControl}" />
+    </Grid>
+</Window>

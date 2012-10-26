@@ -1,0 +1,5 @@
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\bin\Debug\HighScore.Logic.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\bin\Debug\HighScore.Logic.pdb
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.csprojResolveAssemblyReference.cache
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.pdb

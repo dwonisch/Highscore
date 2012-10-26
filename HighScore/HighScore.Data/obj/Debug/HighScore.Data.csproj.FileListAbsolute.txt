@@ -1,0 +1,14 @@
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\x64\SQLite.Interop.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\x86\SQLite.Interop.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\HighScore.Data.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\HighScore.Data.pdb
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\Iesi.Collections.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\NHibernate.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\System.Data.SQLite.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\System.Data.SQLite.Linq.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\Iesi.Collections.xml
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\NHibernate.xml
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.csprojResolveAssemblyReference.cache
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.dll
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.pdb
+E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\hibernate.cfg.xml
