@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 
 namespace HighScore.Logic
 {
-    public class HighScoreContext
+    public class HighScoreContext : ViewModelBase
     {
         public HighScoreContext() {
             Configuration = new HighScoreConfiguration();

@@ -3,3 +3,7 @@ E:\Repositories\highscoretournament\HighScore\HighScore.Logic\bin\Debug\HighScor
 E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.csprojResolveAssemblyReference.cache
 E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.dll
 E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic.pdb
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\App.g.cs
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic_MarkupCompile.cache
+E:\Repositories\highscoretournament\HighScore\HighScore.Logic\obj\Debug\HighScore.Logic_MarkupCompile.lref

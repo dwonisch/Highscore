@@ -2,15 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:HighScore"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:vm="clr-namespace:HighScore.ViewModel"
+        Title="MainWindow" Height="350" Width="525"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <local:Calendar ItemsSource="{Binding  Days}" ItemDoubleClick="{Binding DaySelected}">
-
-        </local:Calendar>
-        <ContentControl Height="50" Grid.Row="1" x:Name="contentControl" Content="{Binding ContentControl}" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button>Zurück</Button>
+            <Button>Vor</Button>
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>
