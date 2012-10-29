@@ -8,24 +8,16 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <DataGrid ItemsSource="{Binding Scores}" AutoGenerateColumns="False">
         <DataGrid.Columns>
-            <!--<DataGridComboBoxColumn Header="Name" SelectedItemBinding="{Binding Name}" DisplayMemberPath="Name">
-                <DataGridComboBoxColumn.EditingElementStyle>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="ItemsSource" Value="{Binding Path=Names}" />
-                    </Style>
-                </DataGridComboBoxColumn.EditingElementStyle>
-            </DataGridComboBoxColumn>-->
             <DataGridTemplateColumn Header="Name" IsReadOnly="False">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <ko:AutoSuggestComboBox Grid.Column="1" Grid.Row="0" Width="180" Height="22" Padding="0, 3, 0, 0" VerticalAlignment="Top"
-                                                ItemsSource="{Binding Names}"
-				SelectedItem="{Binding Name, Mode=TwoWay}"
-				SelectedValue="{Binding Name, Mode=TwoWay}"
-				SelectedValuePath="Name"
-				DisplayMemberPath="Name"
-				>
-                        </ko:AutoSuggestComboBox>
+                        <ko:AutoSuggestComboBox 
+                            ItemsSource="{Binding Names}" 
+                            SelectedItem="{Binding Name, Mode=TwoWay}"
+				            SelectedValue="{Binding Name, Mode=TwoWay}"
+				            SelectedValuePath="Name"
+				            DisplayMemberPath="Name"
+				         />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
