@@ -3,12 +3,5 @@
                   assembly="HighScore.Data"
                   namespace="HighScore.Data">
 
-  <class name="Player" table="players">
-    <id name="Id">
-      <generator class="identity" />
-    </id>
 
-    <property name="FirstName" />
-    <property name="SecondName" />
-  </class>
 </hibernate-mapping>

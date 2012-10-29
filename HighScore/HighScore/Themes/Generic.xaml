@@ -63,4 +63,5 @@
         </Setter>
         <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItemTemplate}" />
     </Style>
+
 </ResourceDictionary>

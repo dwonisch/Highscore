@@ -12,9 +12,13 @@ using System.Windows.Input;
 
 namespace HighScore.ViewModel
 {
-    public class CalendarViewModel : ViewModelBase
+    public class CalendarViewModel : SaveableViewModel
     {
-        public CalendarViewModel() {
+        private Data.DataService database;
+
+        public CalendarViewModel(Data.DataService database)
+        {
+            this.database = database;
             DaySelected = new RelayCommand<CalendarItem>(c => {
                 ViewModelLocator.MainViewModel.ChangeView(c);
             });
@@ -26,7 +30,7 @@ namespace HighScore.ViewModel
             DateTime countDate = Configuration.StartDate;
             while (countDate.Date <= Configuration.EndDate)
             {
-                Days.Add(new CalendarItem(countDate));
+                Days.Add(new CalendarItem(countDate, database));
                 countDate = countDate.AddDays(1);
             }
         }
@@ -34,5 +38,9 @@ namespace HighScore.ViewModel
         private HighScoreConfiguration Configuration { get; set; }
         public ObservableCollection<CalendarItem> Days { get; private set; }
         public ICommand DaySelected { get; set; }
+
+        public override void Save()
+        {
+        }
     }
 }

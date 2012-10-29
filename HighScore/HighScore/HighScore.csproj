@@ -40,6 +40,15 @@
     <Reference Include="GalaSoft.MvvmLight.WPF4">
       <HintPath>..\packages\MvvmLight.4.1.23.0\lib\net40\GalaSoft.MvvmLight.WPF4.dll</HintPath>
     </Reference>
+    <Reference Include="KOControls.Core">
+      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="KOControls.GUI">
+      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="KOControls.GUI.Core">
+      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.GUI.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLight.4.1.23.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -75,9 +84,11 @@
     </ApplicationDefinition>
     <Compile Include="Controls\Calendar.cs" />
     <Compile Include="ViewModel\CalendarItem.cs" />
+    <Compile Include="ViewModel\DisplayScore.cs" />
     <Compile Include="ViewModel\HighScoreConfiguration.cs" />
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SaveableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DayView.xaml.cs">
       <DependentUpon>DayView.xaml</DependentUpon>

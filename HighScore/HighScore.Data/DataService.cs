@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,40 @@ namespace HighScore.Data
 
             sessionFactory = configuration.BuildSessionFactory();
             session = sessionFactory.OpenSession();
+            session.FlushMode = FlushMode.Commit;
+
+            var schemaExport = new SchemaUpdate(configuration);
+            schemaExport.Execute(true, true);
+        }
+
+        private static void BuildSchema()
+        {
+
         }
 
         private ISessionFactory sessionFactory;
         private ISession session;
+
+        public IEnumerable<Score> GetScores(DateTime date) {
+            return session.QueryOver<Score>().List<Score>();
+        }
+
+        public void SaveScores(IEnumerable<Score> scores) {
+            using (var transaction = session.BeginTransaction()) {
+                try
+                {
+                    foreach (var score in scores) {
+                        session.SaveOrUpdate(score);
+                    }
+
+                    transaction.Commit();
+                }
+                catch {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
 
         public void Dispose()
         {
@@ -34,6 +65,11 @@ namespace HighScore.Data
                 session.Dispose();
             if (sessionFactory != null)
                 sessionFactory.Dispose();
+        }
+
+        public IList<Player> GetPlayers()
+        {
+            return session.QueryOver<Player>().List<Player>();
         }
     }
 }

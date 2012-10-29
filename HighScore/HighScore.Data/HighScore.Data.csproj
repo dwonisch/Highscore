@@ -52,21 +52,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataService.cs" />
-    <Compile Include="Day.cs" />
+    <Compile Include="HighScore.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Score.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="nhibernate-mapping.xsd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Day.hbm.xml" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Player.hm.xml" />
-    <Content Include="Score.hbm.xml" />
+    <EmbeddedResource Include="Player.hm.xml" />
+    <EmbeddedResource Include="Score.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HighScore.hbm.xml" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

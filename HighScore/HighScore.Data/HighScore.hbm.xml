@@ -3,12 +3,12 @@
                   assembly="HighScore.Data"
                   namespace="HighScore.Data">
 
-  <class name="Day" table="days">
+  <class name="HighScore" table="highscores">
     <id name="Id">
       <generator class="identity" />
     </id>
 
-    <property name="Date" />
-    <property name="SecondName" />
+    <property name="Value" />
+    <many-to-one name="Score" column="PlayerId" cascade="all" />
   </class>
 </hibernate-mapping>

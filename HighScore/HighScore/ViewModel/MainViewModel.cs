@@ -1,4 +1,8 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using HighScore.Data;
+using System;
+using System.Windows.Input;
 
 namespace HighScore.ViewModel
 {
@@ -18,12 +22,17 @@ namespace HighScore.ViewModel
     {
         public MainViewModel()
         {
-            CurrentViewModel = new CalendarViewModel();
+            DataService database = new DataService();
+
+            CurrentViewModel = new CalendarViewModel(database);
+
+            MainView = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(database); }));
+            Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
         }
 
-        private ViewModelBase currentViewModel;
+        private SaveableViewModel currentViewModel;
 
-        public ViewModelBase CurrentViewModel
+        public SaveableViewModel CurrentViewModel
         {
             get
             {
@@ -33,18 +42,32 @@ namespace HighScore.ViewModel
             {
                 if (currentViewModel == value)
                     return;
+                if (currentViewModel != null)
+                {
+                    currentViewModel.Save();
+                }
+
                 currentViewModel = value;
                 RaisePropertyChanged("CurrentViewModel");
             }
         }
 
-        public void ChangeView(ViewModelBase viewModel)
+        public void ChangeView(SaveableViewModel viewModel)
         {
             CurrentViewModel = viewModel;
         }
+
+        public ICommand MainView
+        {
+            get;
+            private set;
+        }
+
+        public ICommand Save { get; private set; }
     }
 
-    public interface IViewService {
-        void ChangeView(ViewModelBase viewModel);
+    public interface IViewService
+    {
+        void ChangeView(SaveableViewModel viewModel);
     }
 }

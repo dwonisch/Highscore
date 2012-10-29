@@ -39,3 +39,6 @@ E:\Repositories\highscoretournament\HighScore\HighScore\obj\Debug\View\CalendarV
 E:\Repositories\highscoretournament\HighScore\HighScore\obj\Debug\View\CalendarView.baml
 E:\Repositories\highscoretournament\HighScore\HighScore\obj\Debug\View\DayView.baml
 E:\Repositories\highscoretournament\HighScore\HighScore\obj\Debug\View\DayView.g.cs
+E:\Repositories\highscoretournament\HighScore\HighScore\bin\Debug\KOControls.Core.dll
+E:\Repositories\highscoretournament\HighScore\HighScore\bin\Debug\KOControls.GUI.Core.dll
+E:\Repositories\highscoretournament\HighScore\HighScore\bin\Debug\KOControls.GUI.dll
