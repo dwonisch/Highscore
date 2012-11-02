@@ -39,7 +39,7 @@ namespace HighScore.Data
         private ISession session;
 
         public IEnumerable<Score> GetScores(DateTime date) {
-            return session.QueryOver<Score>().List<Score>();
+            return session.QueryOver<Score>().Where(s => s.Date == date).List<Score>();
         }
 
         public void SaveScores(IEnumerable<Score> scores) {
@@ -67,9 +67,9 @@ namespace HighScore.Data
                 sessionFactory.Dispose();
         }
 
-        public IList<Player> GetPlayers()
+        public IList<string> GetPlayers()
         {
-            return session.QueryOver<Player>().List<Player>();
+            return session.QueryOver<Score>().List().Select(s => s.Player).ToList(); ;
         }
     }
 }

@@ -40,15 +40,6 @@
     <Reference Include="GalaSoft.MvvmLight.WPF4">
       <HintPath>..\packages\MvvmLight.4.1.23.0\lib\net40\GalaSoft.MvvmLight.WPF4.dll</HintPath>
     </Reference>
-    <Reference Include="KOControls.Core">
-      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="KOControls.GUI">
-      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.GUI.dll</HintPath>
-    </Reference>
-    <Reference Include="KOControls.GUI.Core">
-      <HintPath>C:\Users\Daniel\Desktop\KOControlsV3\KOControls.GUI.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLight.4.1.23.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -61,6 +52,7 @@
     <Reference Include="System.Data.SQLite.Linq">
       <HintPath>..\packages\System.Data.SQLite.1.0.82.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="system.windows.controls.input.toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLight.4.1.23.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -73,6 +65,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -83,8 +77,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\Calendar.cs" />
-    <Compile Include="ViewModel\CalendarItem.cs" />
-    <Compile Include="ViewModel\DisplayScore.cs" />
+    <Compile Include="Controls\ComboBoxColumn.cs" />
+    <Compile Include="Controls\UIChildFinder.cs" />
+    <Compile Include="DataGridHelper.cs" />
+    <Compile Include="ViewModel\DayViewModel.cs" />
+    <Compile Include="ViewModel\ScoreViewModel.cs" />
     <Compile Include="ViewModel\HighScoreConfiguration.cs" />
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

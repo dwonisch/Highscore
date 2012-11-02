@@ -12,25 +12,19 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 
-namespace HighScore.ViewModel
-{
+namespace HighScore.ViewModel {
     /// <summary>
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
-    {
+    public class ViewModelLocator {
         private static MainViewModel _main;
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-        public ViewModelLocator()
-        {
+        public ViewModelLocator() {
             _main = new MainViewModel();
         }
 
@@ -40,10 +34,8 @@ namespace HighScore.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
-        {
-            get
-            {
+        public MainViewModel Main {
+            get {
                 return _main;
             }
         }

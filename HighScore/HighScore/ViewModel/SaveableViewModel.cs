@@ -1,14 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HighScore.ViewModel
-{
-    public abstract class SaveableViewModel : ViewModelBase
-    {
+namespace HighScore.ViewModel {
+    public abstract class SaveableViewModel : ViewModelBase {
         public abstract void Save();
     }
 }

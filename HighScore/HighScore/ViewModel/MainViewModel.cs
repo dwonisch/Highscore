@@ -4,8 +4,7 @@ using HighScore.Data;
 using System;
 using System.Windows.Input;
 
-namespace HighScore.ViewModel
-{
+namespace HighScore.ViewModel {
     /// <summary>
     /// This class contains properties that the main View can data bind to.
     /// <para>
@@ -18,10 +17,8 @@ namespace HighScore.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase, IViewService
-    {
-        public MainViewModel()
-        {
+    public class MainViewModel : ViewModelBase, IViewService {
+        public MainViewModel() {
             DataService database = new DataService();
 
             CurrentViewModel = new CalendarViewModel(database);
@@ -32,18 +29,14 @@ namespace HighScore.ViewModel
 
         private SaveableViewModel currentViewModel;
 
-        public SaveableViewModel CurrentViewModel
-        {
-            get
-            {
+        public SaveableViewModel CurrentViewModel {
+            get {
                 return currentViewModel;
             }
-            set
-            {
+            set {
                 if (currentViewModel == value)
                     return;
-                if (currentViewModel != null)
-                {
+                if (currentViewModel != null) {
                     currentViewModel.Save();
                 }
 
@@ -52,13 +45,11 @@ namespace HighScore.ViewModel
             }
         }
 
-        public void ChangeView(SaveableViewModel viewModel)
-        {
+        public void ChangeView(SaveableViewModel viewModel) {
             CurrentViewModel = viewModel;
         }
 
-        public ICommand MainView
-        {
+        public ICommand MainView {
             get;
             private set;
         }
@@ -66,8 +57,7 @@ namespace HighScore.ViewModel
         public ICommand Save { get; private set; }
     }
 
-    public interface IViewService
-    {
+    public interface IViewService {
         void ChangeView(SaveableViewModel viewModel);
     }
 }

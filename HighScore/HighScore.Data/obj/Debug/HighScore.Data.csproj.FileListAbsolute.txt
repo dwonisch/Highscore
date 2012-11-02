@@ -8,7 +8,6 @@ E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\System.Da
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\System.Data.SQLite.Linq.dll
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\Iesi.Collections.xml
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\NHibernate.xml
-E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.csprojResolveAssemblyReference.cache
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.dll
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\obj\Debug\HighScore.Data.pdb
 E:\Repositories\highscoretournament\HighScore\HighScore.Data\bin\Debug\hibernate.cfg.xml
