@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <DataGrid x:Name="data" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" 
-              CanUserAddRows="True" RowEditEnding="data_RowEditEnding_1" KeyDown="data_KeyDown_1"
+    <DataGrid x:Name="data" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" KeyboardNavigation.TabNavigation="Cycle"
+              CanUserAddRows="True" RowEditEnding="data_RowEditEnding_1" PreviewKeyDown="HandleKeyDownEvent"
               CanUserDeleteRows="True">
         <DataGrid.Columns>
-            <c:DataGridSuggestTextColumn Header="Name" Binding="{Binding Name}"/>
+            <c:DataGridSuggestTextColumn Header="Name" Binding="{Binding Name}" ItemsSource="{Binding Names}"/>
             <DataGridTextColumn Header="Anzahl" Binding="{Binding Count}" />
             <DataGridTextColumn Header="Score" Binding="{Binding HighScore}" />
             <DataGridTextColumn Header="2nd Score" Binding="{Binding SecondScore}" />

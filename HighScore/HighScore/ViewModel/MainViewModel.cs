@@ -23,11 +23,12 @@ namespace HighScore.ViewModel {
 
             CurrentViewModel = new CalendarViewModel(database);
 
-            MainView = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(database); }));
+            MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(database); }));
             Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
         }
 
         private SaveableViewModel currentViewModel;
+        internal static ICommand MainViewCommand;
 
         public SaveableViewModel CurrentViewModel {
             get {
@@ -49,10 +50,7 @@ namespace HighScore.ViewModel {
             CurrentViewModel = viewModel;
         }
 
-        public ICommand MainView {
-            get;
-            private set;
-        }
+        public ICommand MainView { get { return MainViewCommand;}}
 
         public ICommand Save { get; private set; }
     }

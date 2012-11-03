@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +9,20 @@ using System.Windows.Media;
 
 namespace HighScore.Controls {
     public class DataGridSuggestTextColumn : DataGridTextColumn {
+
+        private BindingBase itemsSource;
+        public BindingBase ItemsSource {
+            get {
+                return itemsSource;
+            }
+            set {
+                if (itemsSource == value)
+                    return;
+
+                itemsSource = value;
+            }
+        }
+
         protected override object PrepareCellForEdit(FrameworkElement editingElement, RoutedEventArgs editingEventArgs) {
             ComboBox comboBox = editingElement as ComboBox;
             if (comboBox == null)
@@ -55,10 +70,11 @@ namespace HighScore.Controls {
 
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem) {
             ComboBox comboBox = new ComboBox();
-            comboBox.ItemsSource = new List<string>() { "Daniel Wonisch", "Desiree Sundl" };
             comboBox.IsEditable = true;
             comboBox.IsDropDownOpen = false;
             ApplyBinding(comboBox, ComboBox.TextProperty);
+            if(itemsSource != null)
+                BindingOperations.SetBinding(comboBox, ComboBox.ItemsSourceProperty, itemsSource);
             return comboBox;
         }
     }

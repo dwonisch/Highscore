@@ -4,6 +4,7 @@
                     xmlns:v="clr-namespace:HighScore.View"
                     xmlns:vm="clr-namespace:HighScore.ViewModel"
                     xmlns:c="clr-namespace:HighScore.Controls"
+                    xmlns:clr="clr-namespace:System;assembly=mscorlib"
                     >
     <DataTemplate x:Key="ItemSelected">
         <Border Background="LightBlue" >
@@ -32,8 +33,11 @@
                                 <TextBlock Grid.Row="1" Text="{Binding Date, StringFormat={}{0:dd}}" TextAlignment="Center" FontSize="48" FontWeight="Bold" Foreground="LightGray"/>
                                 <TextBlock Grid.Row="2" Text="{Binding Date, StringFormat={}{0:MMMM yyyy}}" TextAlignment="Center" Foreground="LightGray"/>
                             </Grid>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding ScoreCount, StringFormat=Scores: {0}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding PlayerCount, StringFormat=Spieler: {0}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
 
-                            <TextBlock Text="Keine Daten verfügbar" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

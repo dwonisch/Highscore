@@ -1,6 +1,8 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 using NHibernate.Tool.hbm2ddl;
+using NHibernate.Transform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +86,8 @@ namespace HighScore.Data
 
         public IList<string> GetPlayers()
         {
-            return session.QueryOver<Score>().List().Select(s => s.Player).ToList(); ;
+            var result = session.QueryOver<Score>().Select(Projections.Group<Score>(p => p.Player)).List<string>();
+            return result.ToList();
         }
     }
 }

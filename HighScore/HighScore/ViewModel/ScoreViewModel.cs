@@ -4,19 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace HighScore.ViewModel {
     public class ScoreViewModel : ViewModelBase {
-        public ScoreViewModel() {
-            this.players = new ObservableCollection<string>();
-            players.Add("Desiree Sundl");
 
+        public ScoreViewModel() {
+            this.players = new ObservableCollection<string>(new DataService().GetPlayers());
+            
             Score = new Score();
         }
 
-        public ScoreViewModel(Score score, IList<string> players) {
-            this.players = new ObservableCollection<string>(players);
-
+        public ScoreViewModel(Score score) : this() {
             Score = score;
         }
 
@@ -73,6 +72,9 @@ namespace HighScore.ViewModel {
                 OnNotifyPropertyChanged("SecondScore");
             }
         }
+
+        public ICommand MainView { get { return MainViewModel.MainViewCommand; } }
+
 
         private void OnNotifyPropertyChanged(string property) {
             if (PropertyChanged != null)

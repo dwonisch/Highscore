@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 namespace HighScore.ViewModel {
@@ -12,13 +13,19 @@ namespace HighScore.ViewModel {
 
         public DayViewModel() {
             Scores = new ObservableCollection<ScoreViewModel>();
+            Scores.Add(new ScoreViewModel());
             Scores.CollectionChanged += Scores_CollectionChanged;
+
+
         }
 
         void Scores_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Remove) {
                 deletedScores.AddRange(e.OldItems.OfType<ScoreViewModel>());
             }
+
+            RaisePropertyChanged(() => ScoreCount);
+            RaisePropertyChanged(() => PlayerCount);
         }
 
         public DayViewModel(DateTime date, DataService database) {
@@ -28,13 +35,19 @@ namespace HighScore.ViewModel {
             Scores.CollectionChanged += Scores_CollectionChanged;
 
             foreach (var score in database.GetScores(date)) {
-                Scores.Add(new ScoreViewModel(score, database.GetPlayers()));
+                Scores.Add(new ScoreViewModel(score));
             }
+
+            if(Scores.Count == 0)
+                Scores.Add(new ScoreViewModel());
         }
 
         public DateTime Date { get; set; }
 
         public ObservableCollection<ScoreViewModel> Scores { get; private set; }
+
+        public int ScoreCount { get { return Scores.Sum(s => s.Count); } }
+        public int PlayerCount { get { return Scores.GroupBy(s => s.Name).Count(); } }
 
         public override void Save() {
             database.DeleteScores(deletedScores.Select(s => s.Score));

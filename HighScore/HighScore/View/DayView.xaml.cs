@@ -9,6 +9,7 @@ namespace HighScore.View {
     public partial class DayView : UserControl {
         public DayView() {
             InitializeComponent();
+            AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)HandleKeyDownEvent);
         }
 
         private bool tabPressed;
@@ -25,6 +26,16 @@ namespace HighScore.View {
                         data.BeginEdit();
                         return null;
                     }), DispatcherPriority.Background, new object[] { null });
+                }
+            }
+        }
+
+        private void HandleKeyDownEvent(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Tab && (Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Shift) {
+                var item = data.CurrentCell.Item;
+                if(data.Items.IndexOf(item) >= data.Items.Count -2){
+                    if(data.Columns.IndexOf(data.CurrentCell.Column) == data.Columns.Count -1)
+                        tabPressed = true;
                 }
             }
         }
