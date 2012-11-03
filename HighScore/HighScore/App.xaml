@@ -18,5 +18,9 @@
         <DataTemplate  DataType="{x:Type vm:DayViewModel}">
             <v:DayView />
         </DataTemplate>
+
+        <DataTemplate  DataType="{x:Type vm:PrintViewModel}">
+            <v:PrintView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

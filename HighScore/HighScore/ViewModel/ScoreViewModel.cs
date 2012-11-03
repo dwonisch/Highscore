@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HighScore.Data;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -19,6 +20,13 @@ namespace HighScore.ViewModel {
         public ScoreViewModel(Score score)
             : this() {
             this.score = score;
+
+            if (score.Values.Count > 0)
+                score1 = score.Values[0].Value;
+
+            if (score.Values.Count > 1)
+                score2 = score.Values[1].Value;
+
             SetPlayerProperties(score.Player);
         }
 
@@ -38,6 +46,15 @@ namespace HighScore.ViewModel {
                 player.Female = female;
                 player.Child = child;
                 score.Player = player;
+
+                if (score.Values.Count == 0)
+                    score.Values.Add(score.CreateValue());
+                if (score.Values.Count == 1)
+                    score.Values.Add(score.CreateValue());
+
+                score.Values[0].Value = score1;
+                score.Values[1].Value = score2;
+
                 return score;
             }
         }
@@ -45,6 +62,8 @@ namespace HighScore.ViewModel {
         private string name;
         private bool female;
         private bool child;
+        private int score1;
+        private int score2;
 
         public string Name {
             get {
@@ -99,23 +118,23 @@ namespace HighScore.ViewModel {
         }
         public int HighScore {
             get {
-                return Score.FirstScore;
+                return score1;
             }
             set {
-                if (Score.FirstScore == value) return;
+                if (score1 == value) return;
 
-                Score.FirstScore = value;
+                score1 = value;
                 RaisePropertyChanged(() => HighScore);
             }
         }
         public int SecondScore {
             get {
-                return Score.SecondScore;
+                return score2;
             }
             set {
-                if (Score.SecondScore == value) return;
+                if (score2 == value) return;
 
-                Score.SecondScore = value;
+                score2 = value;
                 RaisePropertyChanged(() => SecondScore);
             }
         }

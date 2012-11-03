@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using HighScore.Data;
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace HighScore.ViewModel {
@@ -23,6 +24,9 @@ namespace HighScore.ViewModel {
 
             MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
             Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
+            Print = new RelayCommand(new Action(() => {
+                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores());
+            }));
         }
 
         private SaveableViewModel currentViewModel;
@@ -62,8 +66,8 @@ namespace HighScore.ViewModel {
         }
 
         public ICommand MainView { get { return MainViewCommand;}}
-
         public ICommand Save { get; private set; }
+        public ICommand Print { get; private set; }
     }
 
     public interface IViewService {

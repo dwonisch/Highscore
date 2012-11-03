@@ -82,6 +82,7 @@
     <Compile Include="Controls\UIChildFinder.cs" />
     <Compile Include="DataGridHelper.cs" />
     <Compile Include="ViewModel\DayViewModel.cs" />
+    <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\ScoreViewModel.cs" />
     <Compile Include="ViewModel\HighScoreConfiguration.cs" />
     <Compile Include="ViewModel\CalendarViewModel.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DayView.xaml.cs">
       <DependentUpon>DayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrintView.xaml.cs">
+      <DependentUpon>PrintView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CalendarView.xaml">
       <SubType>Designer</SubType>
@@ -115,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrintView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -56,7 +56,9 @@
     <Compile Include="DataService.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultScore.cs" />
     <Compile Include="Score.cs" />
+    <Compile Include="ScoreValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="nhibernate-mapping.xsd" />
@@ -70,6 +72,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Player.hbm.xml" />
+    <EmbeddedResource Include="ScoreValue.hbm.xml" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

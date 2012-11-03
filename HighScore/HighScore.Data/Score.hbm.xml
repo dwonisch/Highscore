@@ -10,7 +10,9 @@
     <property name="Date" />
     <property name="Count" />
     <many-to-one name="Player" cascade="all" />
-    <property name="FirstScore" />
-    <property name="SecondScore" />
+    <bag name="Values" cascade="all" inverse="true">
+      <key column="Score" />
+      <one-to-many class="ScoreValue" />
+    </bag>
   </class>
 </hibernate-mapping>

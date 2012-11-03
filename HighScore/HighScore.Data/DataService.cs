@@ -62,6 +62,8 @@ namespace HighScore.Data
         }
 
         public void DeleteScores(IEnumerable<Score> scores) {
+            if (!scores.Any())
+                return;
             using (var transaction = session.BeginTransaction()) {
                 try {
                     foreach (var score in scores) {
@@ -98,6 +100,25 @@ namespace HighScore.Data
             }
 
             return new Tuple<bool, Player>(true, player);
+        }
+
+        public IEnumerable<ResultScore> GetHighscores() {
+            var scores = session.QueryOver<Score>().List();
+
+            var groups = scores.GroupBy(s => s.Player, s => s.Values.Select(v => v.Value));
+
+            foreach (var group in groups) {
+                var values = group.SelectMany(s => s).OrderByDescending(s => s).Take(2).ToList();
+                int score1 = 0;
+                int score2 = 0;
+
+                if(values.Count > 0)
+                    score1 = values[0];
+                if(values.Count > 1)
+                    score2 = values[1];
+
+                yield return new ResultScore(group.Key.Name, score1, score2);
+            }
         }
     }
 }
