@@ -86,8 +86,18 @@ namespace HighScore.Data
 
         public IList<string> GetPlayers()
         {
-            var result = session.QueryOver<Score>().Select(Projections.Group<Score>(p => p.Player)).List<string>();
+            var result = session.QueryOver<Player>().Select(Projections.Group<Player>(p => p.Name)).List<string>();
             return result.ToList();
+        }
+
+        public Tuple<bool, Player> GetPlayer(string name) {
+            var player = session.QueryOver<Player>().Where(p => p.Name == name).Take(1).SingleOrDefault();
+
+            if (player == null) {
+                return new Tuple<bool, Player>(false, new Player() { Name = name });
+            }
+
+            return new Tuple<bool, Player>(true, player);
         }
     }
 }

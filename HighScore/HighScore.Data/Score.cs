@@ -12,7 +12,7 @@ namespace HighScore.Data
             
         public virtual int Id { get; set; }
         public virtual DateTime Date { get { return date; } set { date = value.Date; } }
-        public virtual string Player { get; set; }
+        public virtual Player Player { get; set; }
         public virtual int Count { get; set; }
         public virtual int FirstScore { get; set; }
         public virtual int SecondScore { get; set; }

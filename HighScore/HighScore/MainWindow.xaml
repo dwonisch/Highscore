@@ -8,13 +8,33 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Command="{Binding MainView}">Übersicht</Button>
-            <Button Command="{Binding Save}">Speichern</Button>
-        </StackPanel>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+        <Grid Grid.Row="0">
+            <Grid.LayoutTransform>
+                <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ScaleValue}"
+                        ScaleY="{Binding ScaleValue}" />
+            </Grid.LayoutTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Command="{Binding MainView}">Übersicht</Button>
+                <Button Command="{Binding Save}">Speichern</Button>
+                <Button Command="{Binding Print}">Gesamtauswertung</Button>
+            </StackPanel>
+            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+        </Grid>
+        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Black">
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Text="{Binding ScaleValue, StringFormat=Zoom: {0:0.00}}"></TextBlock>
+                <Slider Value="{Binding ScaleValue}" Minimum="0.5" Maximum="4" Width="100"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

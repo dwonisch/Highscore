@@ -9,7 +9,7 @@
     
     <property name="Date" />
     <property name="Count" />
-    <property name="Player" />
+    <many-to-one name="Player" cascade="all" />
     <property name="FirstScore" />
     <property name="SecondScore" />
   </class>

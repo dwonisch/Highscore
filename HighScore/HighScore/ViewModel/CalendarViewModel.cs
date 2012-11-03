@@ -7,8 +7,8 @@ namespace HighScore.ViewModel {
     public class CalendarViewModel : SaveableViewModel {
         private Data.DataService database;
 
-        public CalendarViewModel(Data.DataService database) {
-            this.database = database;
+        public CalendarViewModel() {
+            this.database = MainViewModel.Database.Value;
             DaySelected = new RelayCommand<DayViewModel>(c => {
                 ViewModelLocator.MainViewModel.ChangeView(c);
             });

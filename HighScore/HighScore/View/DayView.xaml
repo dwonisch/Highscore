@@ -8,13 +8,15 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <DataGrid x:Name="data" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" KeyboardNavigation.TabNavigation="Cycle"
-              CanUserAddRows="True" RowEditEnding="data_RowEditEnding_1" PreviewKeyDown="HandleKeyDownEvent"
+              CanUserAddRows="True" PreviewKeyDown="HandleKeyDownEvent" RowEditEnding="data_RowEditEnding_1"
               CanUserDeleteRows="True">
         <DataGrid.Columns>
-            <c:DataGridSuggestTextColumn Header="Name" Binding="{Binding Name}" ItemsSource="{Binding Names}"/>
+            <c:DataGridSuggestTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Names}"/>
             <DataGridTextColumn Header="Anzahl" Binding="{Binding Count}" />
             <DataGridTextColumn Header="Score" Binding="{Binding HighScore}" />
             <DataGridTextColumn Header="2nd Score" Binding="{Binding SecondScore}" />
+            <DataGridCheckBoxColumn Header="Damenwertung" Binding="{Binding Female}" />
+            <DataGridCheckBoxColumn Header="Kinderwertung" Binding="{Binding Child}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

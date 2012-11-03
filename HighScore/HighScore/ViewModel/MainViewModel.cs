@@ -19,16 +19,16 @@ namespace HighScore.ViewModel {
     /// </summary>
     public class MainViewModel : ViewModelBase, IViewService {
         public MainViewModel() {
-            DataService database = new DataService();
+            CurrentViewModel = new CalendarViewModel();
 
-            CurrentViewModel = new CalendarViewModel(database);
-
-            MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(database); }));
+            MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
             Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
         }
 
         private SaveableViewModel currentViewModel;
         internal static ICommand MainViewCommand;
+
+        internal static Lazy<DataService> Database = new Lazy<DataService>(new Func<DataService>(() => new DataService()));
 
         public SaveableViewModel CurrentViewModel {
             get {
@@ -48,6 +48,17 @@ namespace HighScore.ViewModel {
 
         public void ChangeView(SaveableViewModel viewModel) {
             CurrentViewModel = viewModel;
+        }
+
+
+        private double scaleValue = 1;
+        public double ScaleValue { 
+            get { return scaleValue; }
+            set {
+                if (scaleValue == value) return;
+                scaleValue = value;
+                RaisePropertyChanged(() => ScaleValue);
+            }
         }
 
         public ICommand MainView { get { return MainViewCommand;}}

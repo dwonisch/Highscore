@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using HighScore.ViewModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -33,16 +34,12 @@ namespace HighScore.View {
         private void HandleKeyDownEvent(object sender, KeyEventArgs e) {
             if (e.Key == Key.Tab && (Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Shift) {
                 var item = data.CurrentCell.Item;
-                if(data.Items.IndexOf(item) >= data.Items.Count -2){
+                var index = data.Items.IndexOf(item);
+                if(index >= data.Items.Count -2){
                     if(data.Columns.IndexOf(data.CurrentCell.Column) == data.Columns.Count -1)
                         tabPressed = true;
                 }
             }
-        }
-
-        private void data_KeyDown_1(object sender, KeyEventArgs e) {
-            if (e.Key == Key.Tab)
-                tabPressed = true;
         }
     }
 }

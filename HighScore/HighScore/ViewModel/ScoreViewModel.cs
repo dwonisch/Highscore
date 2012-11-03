@@ -10,26 +10,73 @@ namespace HighScore.ViewModel {
     public class ScoreViewModel : ViewModelBase {
 
         public ScoreViewModel() {
-            this.players = new ObservableCollection<string>(new DataService().GetPlayers());
-            
-            Score = new Score();
+            dataservice = MainViewModel.Database.Value;
+            this.players = new ObservableCollection<string>(dataservice.GetPlayers());
+
+            this.score = new Score();
         }
 
-        public ScoreViewModel(Score score) : this() {
-            Score = score;
+        public ScoreViewModel(Score score)
+            : this() {
+            this.score = score;
+            SetPlayerProperties(score.Player);
+        }
+
+        private void SetPlayerProperties(Player player) {
+            name = player.Name;
+            Child = player.Child;
+            Female = player.Female;
         }
 
         public ObservableCollection<string> players;
-        public Score Score { get; set; }
+        private Score score;
+        private DataService dataservice;
+
+        public Score Score {
+            get {
+                Player player = dataservice.GetPlayer(Name).Item2;
+                player.Female = female;
+                player.Child = child;
+                score.Player = player;
+                return score;
+            }
+        }
+
+        private string name;
+        private bool female;
+        private bool child;
 
         public string Name {
             get {
-                return Score.Player;
+                return name;
             }
             set {
-                if (Score.Player == value) return;
-                Score.Player = value;
-                OnNotifyPropertyChanged("Name");
+                if (name == value) return;
+                name = value;
+
+                var player = dataservice.GetPlayer(name);
+                SetPlayerProperties(player.Item2);
+                score.Player = player.Item2;
+
+                RaisePropertyChanged(() => Name);
+            }
+        }
+
+        public bool Female {
+            get { return female; }
+            set {
+                if (female == value) return;
+                female = value;
+                RaisePropertyChanged(() => Female);
+            }
+        }
+
+        public bool Child {
+            get { return child; }
+            set {
+                if (child == value) return;
+                child = value;
+                RaisePropertyChanged(() => child);
             }
         }
 
@@ -47,7 +94,7 @@ namespace HighScore.ViewModel {
             set {
                 if (Score.Count == value) return;
                 Score.Count = value;
-                OnNotifyPropertyChanged("Count");
+                RaisePropertyChanged(() => Count);
             }
         }
         public int HighScore {
@@ -58,7 +105,7 @@ namespace HighScore.ViewModel {
                 if (Score.FirstScore == value) return;
 
                 Score.FirstScore = value;
-                OnNotifyPropertyChanged("HighScore");
+                RaisePropertyChanged(() => HighScore);
             }
         }
         public int SecondScore {
@@ -69,18 +116,10 @@ namespace HighScore.ViewModel {
                 if (Score.SecondScore == value) return;
 
                 Score.SecondScore = value;
-                OnNotifyPropertyChanged("SecondScore");
+                RaisePropertyChanged(() => SecondScore);
             }
         }
 
         public ICommand MainView { get { return MainViewModel.MainViewCommand; } }
-
-
-        private void OnNotifyPropertyChanged(string property) {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
-        public new event PropertyChangedEventHandler PropertyChanged;
     }
 }
