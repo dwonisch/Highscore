@@ -7,7 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <DataGrid x:Name="data" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" CanUserAddRows="True" RowEditEnding="data_RowEditEnding_1" KeyDown="data_KeyDown_1">
+    <DataGrid x:Name="data" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" 
+              CanUserAddRows="True" RowEditEnding="data_RowEditEnding_1" KeyDown="data_KeyDown_1"
+              CanUserDeleteRows="True">
         <DataGrid.Columns>
             <c:DataGridSuggestTextColumn Header="Name" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Anzahl" Binding="{Binding Count}" />

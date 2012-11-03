@@ -1,20 +1,31 @@
 ﻿using HighScore.Data;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace HighScore.ViewModel {
     public class DayViewModel : SaveableViewModel {
         private DataService database;
+        private List<ScoreViewModel> deletedScores = new List<ScoreViewModel>();
 
         public DayViewModel() {
             Scores = new ObservableCollection<ScoreViewModel>();
+            Scores.CollectionChanged += Scores_CollectionChanged;
+        }
+
+        void Scores_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
+            if (e.Action == NotifyCollectionChangedAction.Remove) {
+                deletedScores.AddRange(e.OldItems.OfType<ScoreViewModel>());
+            }
         }
 
         public DayViewModel(DateTime date, DataService database) {
             Date = date.Date;
             this.database = database;
             Scores = new ObservableCollection<ScoreViewModel>();
+            Scores.CollectionChanged += Scores_CollectionChanged;
 
             foreach (var score in database.GetScores(date)) {
                 Scores.Add(new ScoreViewModel(score, database.GetPlayers()));
@@ -26,6 +37,9 @@ namespace HighScore.ViewModel {
         public ObservableCollection<ScoreViewModel> Scores { get; private set; }
 
         public override void Save() {
+            database.DeleteScores(deletedScores.Select(s => s.Score));
+            deletedScores.Clear();
+
             foreach (var score in Scores) {
                 score.Date = Date;
             }

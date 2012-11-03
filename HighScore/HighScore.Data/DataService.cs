@@ -59,6 +59,21 @@ namespace HighScore.Data
             }
         }
 
+        public void DeleteScores(IEnumerable<Score> scores) {
+            using (var transaction = session.BeginTransaction()) {
+                try {
+                    foreach (var score in scores) {
+                        session.Delete(score);
+                    }
+
+                    transaction.Commit();
+                } catch {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
         public void Dispose()
         {
             if (session != null)
