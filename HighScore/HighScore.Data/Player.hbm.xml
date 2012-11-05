@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                  assembly="HighScore.Data"
+                  namespace="HighScore.Data">
+  <class name="Player" table="players">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+
+    <property name="Name" />
+    <property name="Female" />
+    <property name="Child" />
+  </class>
+</hibernate-mapping>

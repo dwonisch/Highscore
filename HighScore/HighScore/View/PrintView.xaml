@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="HighScore.View.PrintView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flowdoc="clr-namespace:HighScore.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="900" Background="White">
+    <FlowDocumentScrollViewer>
+        <FlowDocument PageWidth="21cm" PageHeight="29cm" FontSize="0.5cm" FontFamily="Sans" FontWeight="Bold">
+            <Table>
+                <Table.Columns>
+                    <TableColumn Width="3cm" />
+                    <TableColumn />
+                    <TableColumn Width="3cm" />
+                </Table.Columns>
+                <TableRowGroup>
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell FontSize="0.7cm">
+                            <Paragraph TextAlignment="Center">Rangliste: Herren ÖKB Dartturnier</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph FontSize="0.3cm">
+                                <flowdoc:BindableRun BoundText="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            </Paragraph>
+                        </TableCell>
+                    </TableRow>
+                </TableRowGroup>
+            </Table>
+            <flowdoc:ItemsContent ItemsSource="{Binding Scores}" >
+                <flowdoc:ItemsContent.ItemsPanel>
+                    <DataTemplate>
+                        <flowdoc:Fragment VerticalAlignment="Center">
+                            <Table Margin="0" Padding="25" CellSpacing="0">
+                                <Table.Columns>
+                                    <TableColumn Width="1.5cm" />
+                                    <TableColumn />
+                                    <TableColumn Width="2cm" />
+                                    <TableColumn Width="2cm" />
+                                </Table.Columns>
+                                <TableRowGroup  flowdoc:Attached.IsItemsHost="True"></TableRowGroup>
+                            </Table>
+                        </flowdoc:Fragment>
+                    </DataTemplate>
+                </flowdoc:ItemsContent.ItemsPanel>
+                <flowdoc:ItemsContent.ItemTemplate>
+                    <DataTemplate>
+                        <flowdoc:Fragment>
+                            <TableRow>
+                                <TableRow.Background>
+                                    <SolidColorBrush Color="{Binding Background}" />
+                                </TableRow.Background>
+                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="1,1,0,1">
+                                    <Paragraph>
+                                        <flowdoc:BindableRun BoundText="{Binding Place}" />
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,0,1">
+                                    <Paragraph>
+                                        <flowdoc:BindableRun BoundText="{Binding Player}" />
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,0,1" TextAlignment="Center">
+                                    <Paragraph>
+                                        <flowdoc:BindableRun BoundText="{Binding FirstScore}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,1,1" TextAlignment="Center">
+                                    <Paragraph>
+                                        <flowdoc:BindableRun BoundText="{Binding SecondScore}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </flowdoc:Fragment>
+                    </DataTemplate>
+                </flowdoc:ItemsContent.ItemTemplate>
+            </flowdoc:ItemsContent>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</UserControl>

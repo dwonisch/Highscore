@@ -77,8 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Attached.cs" />
+    <Compile Include="Controls\BindableRun.cs" />
     <Compile Include="Controls\Calendar.cs" />
     <Compile Include="Controls\DataGridSuggestTextColumn.cs" />
+    <Compile Include="Controls\Fragment.cs" />
+    <Compile Include="Controls\ItemsContent.cs" />
     <Compile Include="Controls\UIChildFinder.cs" />
     <Compile Include="DataGridHelper.cs" />
     <Compile Include="ViewModel\DayViewModel.cs" />
