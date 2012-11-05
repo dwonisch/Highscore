@@ -26,7 +26,8 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Button Command="{Binding MainView}">Übersicht</Button>
                 <Button Command="{Binding Save}">Speichern</Button>
-                <Button Command="{Binding Print}">Gesamtauswertung</Button>
+                <Button Command="{Binding PrintMale}">Gesamtauswertung Herren</Button>
+                <Button Command="{Binding PrintFemale}">Gesamtauswertung Damen</Button>
             </StackPanel>
             <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
         </Grid>

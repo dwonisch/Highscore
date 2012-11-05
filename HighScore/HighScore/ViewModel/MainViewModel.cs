@@ -24,8 +24,11 @@ namespace HighScore.ViewModel {
 
             MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
             Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
-            Print = new RelayCommand(new Action(() => {
-                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores());
+            PrintMale = new RelayCommand(new Action(() => {
+                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
+            }));
+            PrintFemale = new RelayCommand(new Action(() => {
+                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
             }));
         }
 
@@ -67,7 +70,8 @@ namespace HighScore.ViewModel {
 
         public ICommand MainView { get { return MainViewCommand;}}
         public ICommand Save { get; private set; }
-        public ICommand Print { get; private set; }
+        public ICommand PrintMale { get; private set; }
+        public ICommand PrintFemale { get; private set; }
     }
 
     public interface IViewService {

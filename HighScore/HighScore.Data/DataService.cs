@@ -102,8 +102,8 @@ namespace HighScore.Data
             return new Tuple<bool, Player>(true, player);
         }
 
-        public IEnumerable<ResultScore> GetHighscores() {
-            var scores = session.QueryOver<Score>().List();
+        public IEnumerable<ResultScore> GetHighscores(bool female) {
+            var scores = session.QueryOver<Score>().JoinQueryOver<Player>(s => s.Player).Where(p => p.Female == female).List();
 
             var groups = scores.GroupBy(s => s.Player, s => s.Values.Select(v => v.Value));
 

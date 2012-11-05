@@ -5,23 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:flowdoc="clr-namespace:HighScore.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="900" Background="White">
+             d:DesignHeight="900" d:DesignWidth="900">
     <FlowDocumentScrollViewer>
         <FlowDocument PageWidth="21cm" PageHeight="29cm" FontSize="0.5cm" FontFamily="Sans" FontWeight="Bold">
             <Table>
                 <Table.Columns>
-                    <TableColumn Width="3cm" />
+                    <TableColumn Width="4.5cm" />
                     <TableColumn />
-                    <TableColumn Width="3cm" />
+                    <TableColumn Width="4.5cm" />
                 </Table.Columns>
                 <TableRowGroup>
                     <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell FontSize="0.7cm">
-                            <Paragraph TextAlignment="Center">Rangliste: Herren ÖKB Dartturnier</Paragraph>
-                        </TableCell>
                         <TableCell>
-                            <Paragraph FontSize="0.3cm">
+                            <BlockUIContainer>
+                                <Image Source="../Images/okb.jpg" Width="163" />
+                            </BlockUIContainer>
+                        </TableCell>
+                        <TableCell FontSize="0.7cm">
+                            <Paragraph TextAlignment="Center">Rangliste: ÖKB Gosdorf</Paragraph>
+                            <Paragraph TextAlignment="Center">
+                                <Run>Dartturnier </Run>
+                                <flowdoc:BindableRun BoundText="{Binding Group}" />
+                            </Paragraph>
+                        </TableCell>
+                        <TableCell TextAlignment="Right">
+                            <Paragraph FontSize="0.4cm">
                                 <flowdoc:BindableRun BoundText="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}"/>
                             </Paragraph>
                         </TableCell>
@@ -51,7 +59,7 @@
                                 <TableRow.Background>
                                     <SolidColorBrush Color="{Binding Background}" />
                                 </TableRow.Background>
-                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="1,1,0,1">
+                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="1,1,0,1" TextAlignment="Center">
                                     <Paragraph>
                                         <flowdoc:BindableRun BoundText="{Binding Place}" />
                                     </Paragraph>

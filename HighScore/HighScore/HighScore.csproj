@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVMLight.Nuget.Readme.txt" />
+    <Resource Include="Images\okb.jpg" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
