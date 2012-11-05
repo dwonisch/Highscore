@@ -18,7 +18,7 @@ namespace HighScore.ViewModel {
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase, IViewService {
+    public class MainViewModel : ViewModelBase {
         public MainViewModel() {
             CurrentViewModel = new CalendarViewModel();
 
@@ -29,6 +29,11 @@ namespace HighScore.ViewModel {
             }));
             PrintFemale = new RelayCommand(new Action(() => {
                 CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
+            }));
+            ClosingCommand = new RelayCommand(new Action(() => {
+                var viewmodel = new ClosingViewModel();
+                CurrentViewModel = viewmodel;
+                viewmodel.Execute();
             }));
         }
 
@@ -72,9 +77,6 @@ namespace HighScore.ViewModel {
         public ICommand Save { get; private set; }
         public ICommand PrintMale { get; private set; }
         public ICommand PrintFemale { get; private set; }
-    }
-
-    public interface IViewService {
-        void ChangeView(SaveableViewModel viewModel);
+        public ICommand ClosingCommand { get; private set; }
     }
 }

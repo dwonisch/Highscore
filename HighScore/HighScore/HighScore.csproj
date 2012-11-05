@@ -85,6 +85,8 @@
     <Compile Include="Controls\ItemsContent.cs" />
     <Compile Include="Controls\UIChildFinder.cs" />
     <Compile Include="DataGridHelper.cs" />
+    <Compile Include="ViewModel\ClosingTask.cs" />
+    <Compile Include="ViewModel\ClosingViewModel.cs" />
     <Compile Include="ViewModel\DayViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\ScoreViewModel.cs" />
@@ -93,6 +95,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SaveableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ClosingView.xaml.cs">
+      <DependentUpon>ClosingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DayView.xaml.cs">
       <DependentUpon>DayView.xaml</DependentUpon>
     </Compile>
@@ -119,6 +124,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClosingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
