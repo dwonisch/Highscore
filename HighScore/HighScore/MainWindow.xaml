@@ -5,11 +5,12 @@
         xmlns:vm="clr-namespace:HighScore.ViewModel"
         xmlns:c="clr-namespace:HighScore.Controls"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
-            <i:InvokeCommandAction Command="{Binding ClosingCommand}" />
+            <cmd:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>

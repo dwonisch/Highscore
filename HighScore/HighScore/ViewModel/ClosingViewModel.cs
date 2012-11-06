@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HighScore.ViewModel {
@@ -14,11 +15,19 @@ namespace HighScore.ViewModel {
         public ClosingViewModel() {
             Tasks = new ObservableCollection<ClosingTask>();
             Tasks.Add(new ClosingTask("Datenbanken werden gesichtert", UploadDatabase));
+            Tasks.Add(new ClosingTask("Warten", () => {
+                Thread.Sleep(5000);
+                return string.Empty;
+            }));
         }
 
         public void Execute() {
-            Tasks.ToList().ForEach(t => t.Execute());
+                Parallel.ForEach(Tasks, t => t.Execute());
+                if(Completed != null)
+                    Completed(this, EventArgs.Empty);
         }
+
+        public event EventHandler Completed;
 
         private string UploadDatabase() {
             string newFileName = string.Format("{0:yyyy-MM-dd-HHmmss}-database.db", DateTime.Now);

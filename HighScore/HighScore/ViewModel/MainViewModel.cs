@@ -1,9 +1,15 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using HighScore.Data;
 using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace HighScore.ViewModel {
     /// <summary>
@@ -20,6 +26,8 @@ namespace HighScore.ViewModel {
     /// </summary>
     public class MainViewModel : ViewModelBase {
         public MainViewModel() {
+            DispatcherHelper.Initialize();
+
             CurrentViewModel = new CalendarViewModel();
 
             MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
@@ -30,15 +38,28 @@ namespace HighScore.ViewModel {
             PrintFemale = new RelayCommand(new Action(() => {
                 CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
             }));
-            ClosingCommand = new RelayCommand(new Action(() => {
-                var viewmodel = new ClosingViewModel();
-                CurrentViewModel = viewmodel;
-                viewmodel.Execute();
+            ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
+                if (!canClose) {
+                    var viewmodel = new ClosingViewModel();
+                    viewmodel.Completed += viewmodel_Completed;
+                    CurrentViewModel = viewmodel;
+
+                    Task.Factory.StartNew(() => viewmodel.Execute()); 
+
+                    args.Cancel = true;
+                }
             }));
+        }
+
+        void viewmodel_Completed(object sender, EventArgs e) {
+            canClose = true;
+
+            DispatcherHelper.CheckBeginInvokeOnUI(() => Application.Current.Shutdown());
         }
 
         private SaveableViewModel currentViewModel;
         internal static ICommand MainViewCommand;
+        private bool canClose;
 
         internal static Lazy<DataService> Database = new Lazy<DataService>(new Func<DataService>(() => new DataService()));
 
@@ -77,6 +98,6 @@ namespace HighScore.ViewModel {
         public ICommand Save { get; private set; }
         public ICommand PrintMale { get; private set; }
         public ICommand PrintFemale { get; private set; }
-        public ICommand ClosingCommand { get; private set; }
+        public RelayCommand<CancelEventArgs> ClosingCommand { get; private set; }
     }
 }
