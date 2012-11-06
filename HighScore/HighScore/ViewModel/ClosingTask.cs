@@ -46,10 +46,10 @@ namespace HighScore.ViewModel {
         }
 
         public void Execute() {
-            working = true;
-            status = task.Invoke();
-            working = false;
-            completed = true;
+            Working = true;
+            Status = task.Invoke();
+            Working = false;
+            Completed = true;
         }
     }
 }
