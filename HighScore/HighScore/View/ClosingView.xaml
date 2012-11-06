@@ -3,9 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <DataGrid ItemsSource="{Binding Tasks}">
-            
-    </DataGrid>
+             xmlns:c="clr-namespace:HighScore.Controls"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <c:BooleanToVisibilityConverter x:Key="Visibility" />
+    </UserControl.Resources>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock TextAlignment="Center">Anwendung wird beendet...</TextBlock>
+        <TextBlock TextAlignment="Center"></TextBlock>
+        <ListBox  ItemsSource="{Binding Tasks}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True">
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}" >
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <ProgressBar Margin="5" Width="16" Height="16" IsIndeterminate="True" Visibility="{Binding Working, Converter={StaticResource Visibility}}"/>
+                                    <Image Margin="5" Source="../Images/ok.png" Visibility="{Binding Completed, Converter={StaticResource Visibility}}" />
+                                    <Image Margin="5" Source="../Images/nok.png" Visibility="{Binding Failed, Converter={StaticResource Visibility}}" />
+                                    <TextBlock Margin="5" Text="{Binding Text}" />
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </StackPanel>
 </UserControl>

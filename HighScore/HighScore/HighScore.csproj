@@ -79,10 +79,13 @@
     </ApplicationDefinition>
     <Compile Include="Controls\Attached.cs" />
     <Compile Include="Controls\BindableRun.cs" />
+    <Compile Include="Controls\BooleanToVisibilityConverter.cs" />
     <Compile Include="Controls\Calendar.cs" />
     <Compile Include="Controls\DataGridSuggestTextColumn.cs" />
+    <Compile Include="Controls\DoubleConverter.cs" />
     <Compile Include="Controls\Fragment.cs" />
     <Compile Include="Controls\ItemsContent.cs" />
+    <Compile Include="Controls\LoadingCircle.cs" />
     <Compile Include="Controls\UIChildFinder.cs" />
     <Compile Include="DataGridHelper.cs" />
     <Compile Include="ViewModel\ClosingTask.cs" />
@@ -177,6 +180,8 @@
   <ItemGroup>
     <Resource Include="MVVMLight.Nuget.Readme.txt" />
     <Resource Include="Images\okb.jpg" />
+    <Resource Include="Images\ok.png" />
+    <Resource Include="Images\nok.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

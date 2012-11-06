@@ -64,4 +64,308 @@
         </Setter>
         <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItemTemplate}" />
     </Style>
+
+    <Style TargetType="{x:Type c:LoadingCircle}" BasedOn="{StaticResource {x:Type Control}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:LoadingCircle}">
+                    <Grid>
+                        <Grid.Resources>
+                            <c:DoubleConverter x:Key="NumberConverter" />
+                            <Color R="255" G="255" B="255" A="255" x:Key="HighlightColor" />
+                            <Style TargetType="Border" x:Key="BorderStyle">
+                                <Setter Property="CornerRadius" Value="{Binding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5, RelativeSource={RelativeSource AncestorType={x:Type c:LoadingCircle}}}" />
+                                <Setter Property="Width" Value="{Binding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.2, RelativeSource={RelativeSource AncestorType={x:Type c:LoadingCircle}}}" />
+                                <Setter Property="Height" Value="{Binding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.2, RelativeSource={RelativeSource AncestorType={x:Type c:LoadingCircle}}}" />
+                            </Style>
+                            <Duration x:Key="SpinnerDuration">0:0:0.36</Duration>
+                            <Duration x:Key="OpacityDuration">0:0:0.1</Duration>
+                            <CircleEase x:Key="SpinnerEase" EasingMode="EaseIn" />
+                            <BackEase x:Key="OpacityEase" EasingMode="EaseInOut" />
+                        </Grid.Resources>
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="0" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.030" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.20" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="30" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.060" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.50" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="60" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.090" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.80" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="90" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.120" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.110" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="120" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.150" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.140" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="150" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.180" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.170" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="180" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.210" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.200" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="210" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.240" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.230" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="240" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.270" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.260" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="270" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.300" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.290" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="300" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.330" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.320" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding BackgroundColor}" />
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="330" CenterX="{TemplateBinding ActualWidth,Converter={StaticResource NumberConverter},ConverterParameter=0.5}" CenterY="{TemplateBinding ActualHeight,Converter={StaticResource NumberConverter},ConverterParameter=0.5.5}" />
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:0.360" EasingFunction="{StaticResource SpinnerEase}" Duration="{StaticResource SpinnerDuration}" RepeatBehavior="Forever" Storyboard.TargetProperty="Background.Color" To="{StaticResource HighlightColor}" />
+                                                    <DoubleAnimation BeginTime="0:0:0.350" EasingFunction="{StaticResource OpacityEase}" Duration="{StaticResource SpinnerDuration}" Storyboard.TargetProperty="Opacity" From="0.7" To="1" RepeatBehavior="Forever"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

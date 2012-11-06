@@ -8,9 +8,9 @@ namespace HighScore.ViewModel {
     public class ClosingTask : ViewModelBase {
         private Func<string> task;
         private string text;
-        private string status;
         private bool working;
         private bool completed;
+        private bool failed;
 
         public ClosingTask(string text, Func<string> task) {
             this.text = text;
@@ -18,6 +18,7 @@ namespace HighScore.ViewModel {
         }
 
         public string Text { get { return text; } }
+
         public bool Completed {
             get { return completed; }
             set {
@@ -26,13 +27,13 @@ namespace HighScore.ViewModel {
                 RaisePropertyChanged(() => Completed);
             }
         }
-        public string Status {
-            get { return status; }
-            set {
-                if (status == value) return;
-                status = value;
-                RaisePropertyChanged(() => Status);
 
+        public bool Failed {
+            get { return failed; }
+            set {
+                if (failed == value) return;
+                failed = value;
+                RaisePropertyChanged(() => Failed);
             }
         }
 
@@ -47,9 +48,13 @@ namespace HighScore.ViewModel {
 
         public void Execute() {
             Working = true;
-            Status = task.Invoke();
+            try {
+                task.Invoke();
+                Completed = true;
+            } catch (Exception ex) {
+                Failed = true;
+            }
             Working = false;
-            Completed = true;
         }
     }
 }
