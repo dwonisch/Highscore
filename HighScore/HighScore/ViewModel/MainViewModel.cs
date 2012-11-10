@@ -33,73 +33,13 @@ namespace HighScore.ViewModel {
             DispatcherHelper.Initialize();
 
             var start = new StartingViewModel();
-            start.Completed += (sender, args) => { 
+            start.Completed += (sender, args) => {
                 CurrentViewModel = new CalendarViewModel();
                 settings = Database.Value.GetSettings();
                 RaisePropertyChanged(() => ScaleValue);
             };
             CurrentViewModel = start;
             Task.Factory.StartNew(() => start.Execute());
-
-            MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
-            Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));
-            PrintMale = new RelayCommand(new Action(() => {
-                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
-            }));
-            PrintFemale = new RelayCommand(new Action(() => {
-                CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
-            }));
-            PrintDay = new RelayCommand(new Action(() => {
-                CurrentViewModel = new PrintDayViewModel(Database.Value.GetDayScores());
-            }));
-            ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
-                if (!canClose) {
-                    Database.Value.SaveSettings(settings);
-
-                    var viewmodel = new ClosingViewModel();
-                    viewmodel.Completed += viewmodel_Completed;
-                    CurrentViewModel = viewmodel;
-
-                    Task.Factory.StartNew(() => viewmodel.Execute());
-
-                    args.Cancel = true;
-                }
-            }));
-            Upload = new RelayCommand(new Action(() => {
-
-                if (!Directory.Exists("html"))
-                    Directory.CreateDirectory("html");
-                if (!File.Exists("html\\index.html"))
-                    File.Create("html\\index.html");
-                if (File.Exists("html\\men.html"))
-                    File.Delete("html\\men.html");
-                if (!File.Exists("html\\women.html"))
-                    File.Create("html\\women.html");
-
-
-
-
-                using (var stream = File.Create("html\\men.html")) {
-                    var print = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
-                    CreateHTML(print, stream);
-                }
-                UploadDatabase("men.html");
-
-                using (var stream = File.Create("html\\women.html")) {
-                    var print = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
-                    CreateHTML(print, stream);
-
-                }
-                UploadDatabase("women.html");
-
-                using (var stream = File.Create("html\\index.html")) {
-                    var print = new PrintDayViewModel(Database.Value.GetDayScores());
-                    CreateHTML(print, stream);
-
-                }
-                UploadDatabase("index.html");
-
-            }));
         }
 
         private string UploadDatabase(string newFileName) {
@@ -180,7 +120,7 @@ namespace HighScore.ViewModel {
         }
 
         private SaveableViewModel currentViewModel;
-        internal static ICommand MainViewCommand;
+        private ICommand MainViewCommand;
         private bool canClose;
         private Settings settings;
 
@@ -217,13 +157,118 @@ namespace HighScore.ViewModel {
             }
         }
 
-        public ICommand MainView { get { return MainViewCommand; } }
-        public ICommand Save { get; private set; }
-        public ICommand PrintMale { get; private set; }
-        public ICommand PrintFemale { get; private set; }
-        public ICommand PrintDay { get; private set; }
-        public ICommand Upload { get; private set; }
-        public RelayCommand<CancelEventArgs> ClosingCommand { get; private set; }
+        private ICommand SaveCommand;
+        private ICommand PrintMaleCommand;
+        private ICommand PrintFemaleCommand;
+        private ICommand PrintDayCommand;
+        private ICommand UploadCommand;
+        private RelayCommand<CancelEventArgs> ClosingCommand;
+
+        public ICommand MainView {
+            get {
+                if (MainViewCommand == null) {
+                    MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
+                }
+                return MainViewCommand;
+            }
+        }
+
+        public ICommand Save {
+            get {
+                if (SaveCommand == null) {
+                    SaveCommand = new RelayCommand(new Action(() => CurrentViewModel.Save()));
+                }
+                return SaveCommand;
+            }
+        }
+        public ICommand PrintMale { get {
+            if (PrintMaleCommand == null) {
+                PrintMaleCommand = new RelayCommand(new Action(() => {
+                    CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
+                }));
+            }
+            return PrintMaleCommand;
+        } }
+        public ICommand PrintFemale {
+            get {
+                if (PrintFemaleCommand == null) {
+                    PrintFemaleCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
+                    }));
+                }
+                return PrintFemaleCommand;
+            }
+        }
+        public ICommand PrintDay {
+            get {
+                if (PrintDayCommand == null) {
+                    PrintDayCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintDayViewModel(Database.Value.GetDayScores());
+                    }));
+                }
+                return PrintDayCommand;
+            }
+        }
+        public ICommand Upload {
+            get {
+                if (UploadCommand == null) {
+                    UploadCommand = new RelayCommand(new Action(() => {
+
+                        if (!Directory.Exists("html"))
+                            Directory.CreateDirectory("html");
+                        if (!File.Exists("html\\index.html"))
+                            File.Create("html\\index.html");
+                        if (File.Exists("html\\men.html"))
+                            File.Delete("html\\men.html");
+                        if (!File.Exists("html\\women.html"))
+                            File.Create("html\\women.html");
+
+
+
+
+                        using (var stream = File.Create("html\\men.html")) {
+                            var print = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
+                            CreateHTML(print, stream);
+                        }
+                        UploadDatabase("men.html");
+
+                        using (var stream = File.Create("html\\women.html")) {
+                            var print = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
+                            CreateHTML(print, stream);
+
+                        }
+                        UploadDatabase("women.html");
+
+                        using (var stream = File.Create("html\\index.html")) {
+                            var print = new PrintDayViewModel(Database.Value.GetDayScores());
+                            CreateHTML(print, stream);
+
+                        }
+                        UploadDatabase("index.html");
+
+                    }));
+                }
+                return UploadCommand;
+            }
+        }
+        public RelayCommand<CancelEventArgs> Closing { get {
+            if (ClosingCommand == null) {
+                ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
+                    if (!canClose) {
+                        Database.Value.SaveSettings(settings);
+
+                        var viewmodel = new ClosingViewModel();
+                        viewmodel.Completed += viewmodel_Completed;
+                        CurrentViewModel = viewmodel;
+
+                        Task.Factory.StartNew(() => viewmodel.Execute());
+
+                        args.Cancel = true;
+                    }
+                }));
+            }
+            return ClosingCommand;
+        } }
     }
 
     public static class StreamExtensions {

@@ -138,7 +138,5 @@ namespace HighScore.ViewModel {
                 RaisePropertyChanged(() => SecondScore);
             }
         }
-
-        public ICommand MainView { get { return MainViewModel.MainViewCommand; } }
     }
 }

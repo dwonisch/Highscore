@@ -15,9 +15,6 @@ namespace HighScore.ViewModel {
         public ClosingViewModel() {
             Tasks = new ObservableCollection<ClosingTask>();
             Tasks.Add(new ClosingTask("Datenbanken werden gesichert", UploadDatabase));
-            Tasks.Add(new ClosingTask("Warten", () => {
-                Thread.Sleep(5000);
-            }));
         }
 
         public void Execute() {
