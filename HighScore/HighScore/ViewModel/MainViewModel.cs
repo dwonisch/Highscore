@@ -32,7 +32,10 @@ namespace HighScore.ViewModel {
         public MainViewModel() {
             DispatcherHelper.Initialize();
 
-            CurrentViewModel = new CalendarViewModel();
+            var start = new StartingViewModel();
+            start.Completed += (sender, args) => CurrentViewModel = new CalendarViewModel();
+            CurrentViewModel = start;
+            Task.Factory.StartNew(() => start.Execute());
 
             MainViewCommand = new RelayCommand(new Action(() => { CurrentViewModel = new CalendarViewModel(); }));
             Save = new RelayCommand(new Action(() => CurrentViewModel.Save()));

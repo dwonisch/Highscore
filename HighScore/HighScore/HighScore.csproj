@@ -97,6 +97,7 @@
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SaveableViewModel.cs" />
+    <Compile Include="ViewModel\StartingViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ClosingView.xaml.cs">
       <DependentUpon>ClosingView.xaml</DependentUpon>

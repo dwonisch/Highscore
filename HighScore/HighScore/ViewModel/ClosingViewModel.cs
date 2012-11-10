@@ -17,34 +17,31 @@ namespace HighScore.ViewModel {
             Tasks.Add(new ClosingTask("Datenbanken werden gesichtert", UploadDatabase));
             Tasks.Add(new ClosingTask("Warten", () => {
                 Thread.Sleep(5000);
-                return string.Empty;
             }));
         }
 
         public void Execute() {
-                Parallel.ForEach(Tasks, t => t.Execute());
-                if(Completed != null)
-                    Completed(this, EventArgs.Empty);
+            Parallel.ForEach(Tasks, t => t.Execute());
+            if (Completed != null)
+                Completed(this, EventArgs.Empty);
         }
 
         public event EventHandler Completed;
 
-        private string UploadDatabase() {
-            string newFileName = string.Format("{0:yyyy-MM-dd-HHmmss}-database.db", DateTime.Now);
+        private void UploadDatabase() {
+            UploadFile("database.db", string.Format("{0:yyyy-MM-dd-HHmmss}-database.db", DateTime.Now));
+            UploadFile("database.db", "database.db");
+        }
 
-            FtpWebRequest ftprequest = (FtpWebRequest)WebRequest.Create("ftp://www.woni.at/" + newFileName);
+        private static string UploadFile(string fileName, string newFileName) {
+            var ftprequest = (FtpWebRequest)WebRequest.Create("ftp://www.woni.at/" + newFileName);
 
             ftprequest.Method = WebRequestMethods.Ftp.UploadFile;
             ftprequest.Credentials = new NetworkCredential("u52287998-dart", "dartturnier");
 
-
-            using (var reader = new StreamReader("database.db")) {
-                byte[] fileContents = Encoding.UTF8.GetBytes(reader.ReadToEnd());
-                ftprequest.ContentLength = fileContents.Length;
-
-                using (var writer = ftprequest.GetRequestStream()) {
-                    writer.Write(fileContents, 0, fileContents.Length);
-                }
+            using (var writer = ftprequest.GetRequestStream()) {
+                var bytes = File.ReadAllBytes(fileName);
+                writer.Write(bytes, 0, bytes.Length);
             }
 
             FtpWebResponse response = (FtpWebResponse)ftprequest.GetResponse();

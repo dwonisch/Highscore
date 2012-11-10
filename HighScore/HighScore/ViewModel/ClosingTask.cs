@@ -6,13 +6,13 @@ using System.Text;
 
 namespace HighScore.ViewModel {
     public class ClosingTask : ViewModelBase {
-        private Func<string> task;
+        private Action task;
         private string text;
         private bool working;
         private bool completed;
         private bool failed;
 
-        public ClosingTask(string text, Func<string> task) {
+        public ClosingTask(string text, Action task) {
             this.text = text;
             this.task = task;
         }

@@ -25,5 +25,8 @@
         <DataTemplate DataType="{x:Type vm:ClosingViewModel}">
             <v:ClosingView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:StartingViewModel}">
+            <v:ClosingView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
