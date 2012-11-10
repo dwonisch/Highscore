@@ -36,6 +36,7 @@
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding ScoreCount, StringFormat=Scores: {0}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding PlayerCount, StringFormat=Spieler: {0}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Money, StringFormat=Betrag: € {0}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </StackPanel>
 
                         </Grid>

@@ -8,5 +8,5 @@
              xmlns:c="clr-namespace:HighScore.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-        <c:Calendar ItemsSource="{Binding  Days}" ItemDoubleClick="{Binding DaySelected}"/>
+        <c:Calendar ItemsSource="{Binding  Days}" ItemDoubleClick="{Binding DaySelected}" SelectedItem="{Binding SelectedDay}"/>
 </UserControl>

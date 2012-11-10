@@ -7,8 +7,8 @@ namespace HighScore {
     /// </summary>
     public partial class App : Application {
         protected override void OnStartup(StartupEventArgs e) {
-            DataService data = new DataService();
-
+            DispatcherUnhandledException += (sender, args) => MessageBox.Show(args.Exception.ToString());
+               
             base.OnStartup(e);
         }
     }

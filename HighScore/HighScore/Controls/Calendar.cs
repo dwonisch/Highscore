@@ -21,5 +21,11 @@ namespace HighScore.Controls {
             set { SetValue(ItemDoubleClickProperty, value); }
         }
 
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e) {
+            base.OnSelectionChanged(e);
+            if(e.AddedItems.Count > 0)
+                ScrollIntoView(e.AddedItems[0]);
+        }
+
     }
 }

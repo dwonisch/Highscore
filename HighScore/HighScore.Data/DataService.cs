@@ -21,7 +21,7 @@ namespace HighScore.Data
         public DataService()
         {
             var configuration = new Configuration();
-                configuration.Configure();
+            configuration.Configure(GetType().Assembly, "HighScore.Data.hibernate.cfg.xml");
             configuration.AddAssembly(typeof(DataService).Assembly);
 
             sessionFactory = configuration.BuildSessionFactory();

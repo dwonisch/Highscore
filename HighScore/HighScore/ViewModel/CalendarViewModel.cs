@@ -20,13 +20,19 @@ namespace HighScore.ViewModel {
 
             DateTime countDate = Configuration.StartDate;
             while (countDate.Date <= Configuration.EndDate) {
-                Days.Add(new DayViewModel(countDate, database));
+                var day = new DayViewModel(countDate, database);
+                Days.Add(day);
+
+                if (countDate.Date == DateTime.Now.AddDays(2).Date)
+                    SelectedDay = day;
+                
                 countDate = countDate.AddDays(1);
             }
         }
 
         private HighScoreConfiguration Configuration { get; set; }
         public ObservableCollection<DayViewModel> Days { get; private set; }
+        public DayViewModel SelectedDay { get; set; }
         public ICommand DaySelected { get; set; }
 
         public override void Save() {

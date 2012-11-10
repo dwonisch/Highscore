@@ -48,6 +48,7 @@ namespace HighScore.ViewModel {
 
         public int ScoreCount { get { return Scores.Sum(s => s.Count); } }
         public int PlayerCount { get { return Scores.GroupBy(s => s.Name).Count(); } }
+        public double Money { get { return ScoreCount * 1.50;}}
 
         public override void Save() {
             database.DeleteScores(deletedScores.Select(s => s.Score));
