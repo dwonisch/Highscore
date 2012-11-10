@@ -131,5 +131,22 @@ namespace HighScore.Data
                 yield return new ResultScore(score.Date, score.Player.Name, score.Values.Select(v => v.Value).Max(), score.Values.Select(v => v.Value).Min());
             }
         }
+
+        public Settings GetSettings() {
+            var setting = session.QueryOver<Settings>().Take(1).SingleOrDefault();
+            return setting ?? new Settings();
+        }
+
+        public void SaveSettings(Settings settings) {
+            using (var transaction = session.BeginTransaction()) {
+                try {
+                    session.SaveOrUpdate(settings);
+                    transaction.Commit();
+                } catch {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
     }
 }

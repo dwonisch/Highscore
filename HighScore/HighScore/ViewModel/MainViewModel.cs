@@ -33,7 +33,11 @@ namespace HighScore.ViewModel {
             DispatcherHelper.Initialize();
 
             var start = new StartingViewModel();
-            start.Completed += (sender, args) => CurrentViewModel = new CalendarViewModel();
+            start.Completed += (sender, args) => { 
+                CurrentViewModel = new CalendarViewModel();
+                settings = Database.Value.GetSettings();
+                RaisePropertyChanged(() => ScaleValue);
+            };
             CurrentViewModel = start;
             Task.Factory.StartNew(() => start.Execute());
 
@@ -50,6 +54,8 @@ namespace HighScore.ViewModel {
             }));
             ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
                 if (!canClose) {
+                    Database.Value.SaveSettings(settings);
+
                     var viewmodel = new ClosingViewModel();
                     viewmodel.Completed += viewmodel_Completed;
                     CurrentViewModel = viewmodel;
@@ -176,6 +182,7 @@ namespace HighScore.ViewModel {
         private SaveableViewModel currentViewModel;
         internal static ICommand MainViewCommand;
         private bool canClose;
+        private Settings settings;
 
         internal static Lazy<DataService> Database = new Lazy<DataService>(new Func<DataService>(() => new DataService()));
 
@@ -199,14 +206,14 @@ namespace HighScore.ViewModel {
             CurrentViewModel = viewModel;
         }
 
-
-        private double scaleValue = 1;
         public double ScaleValue {
-            get { return scaleValue; }
+            get { return settings == null ? 1 : settings.Zoom; }
             set {
-                if (scaleValue == value) return;
-                scaleValue = value;
-                RaisePropertyChanged(() => ScaleValue);
+                if (settings != null) {
+                    if (settings.Zoom == value) return;
+                    settings.Zoom = value;
+                    RaisePropertyChanged(() => ScaleValue);
+                }
             }
         }
 
