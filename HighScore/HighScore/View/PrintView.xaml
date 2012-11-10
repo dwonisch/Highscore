@@ -13,6 +13,7 @@
                     <TableColumn Width="4.5cm" />
                     <TableColumn />
                     <TableColumn Width="4.5cm" />
+                    <TableColumn Width="2cm" />
                 </Table.Columns>
                 <TableRowGroup>
                     <TableRow>
@@ -32,6 +33,14 @@
                             <Paragraph FontSize="0.4cm">
                                 <flowdoc:BindableRun BoundText="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}"/>
                             </Paragraph>
+                            <Paragraph FontSize="0.4cm">
+                                <Run>www.dart-gosdorf.at</Run>
+                            </Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <BlockUIContainer>
+                                <Image Source="../Images/wr.png" Width="65" />
+                            </BlockUIContainer>
                         </TableCell>
                     </TableRow>
                 </TableRowGroup>
@@ -42,7 +51,7 @@
                         <flowdoc:Fragment VerticalAlignment="Center">
                             <Table Margin="0" Padding="25" CellSpacing="0">
                                 <Table.Columns>
-                                    <TableColumn Width="1.5cm" />
+                                    <TableColumn Width="3cm" />
                                     <TableColumn />
                                     <TableColumn Width="2cm" />
                                     <TableColumn Width="2cm" />

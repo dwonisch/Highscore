@@ -6,7 +6,7 @@
         xmlns:c="clr-namespace:HighScore.Controls"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Height="435" Width="662"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
@@ -35,6 +35,8 @@
                 <Button Command="{Binding Save}">Speichern</Button>
                 <Button Command="{Binding PrintMale}">Gesamtauswertung Herren</Button>
                 <Button Command="{Binding PrintFemale}">Gesamtauswertung Damen</Button>
+                <Button Command="{Binding PrintDay}">Tagesauswertung</Button>
+                <Button Command="{Binding Upload}">Upload</Button>
             </StackPanel>
             <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
         </Grid>

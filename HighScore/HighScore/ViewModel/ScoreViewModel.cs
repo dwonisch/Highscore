@@ -95,7 +95,7 @@ namespace HighScore.ViewModel {
             set {
                 if (child == value) return;
                 child = value;
-                RaisePropertyChanged(() => child);
+                RaisePropertyChanged(() => Child);
             }
         }
 

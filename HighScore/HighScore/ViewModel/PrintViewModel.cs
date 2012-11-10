@@ -8,11 +8,13 @@ using System.Windows.Media;
 
 namespace HighScore.ViewModel {
     public class PrintViewModel : SaveableViewModel {
-        public PrintViewModel(IEnumerable<ResultScore> scores, string group) {
+        public PrintViewModel() {
             Date = DateTime.Now;
-            Group = group;
             Scores = new ObservableCollection<PrintViewModelItem>();
+        }
 
+        public PrintViewModel(IEnumerable<ResultScore> scores, string group) : this() {
+            Group = group;
             int lastposition = 0;
             int count = 1;
             ResultScore lastItem = null;
@@ -38,9 +40,21 @@ namespace HighScore.ViewModel {
 
         public ObservableCollection<PrintViewModelItem> Scores { get; private set; }
         public DateTime Date { get; private set; }
-        public string Group { get; private set; }
+        public string Group { get; protected set; }
 
         public override void Save() {
+        }
+    }
+
+    public class PrintDayViewModel : PrintViewModel {
+        public PrintDayViewModel(IEnumerable<ResultScore> scores) {
+            Group = "Tagessieger";
+
+            int color = 0;
+            foreach (var score in scores.OrderBy(s => s.Date)) {
+                Scores.Add(new PrintViewModelItem(score.Date.ToString("dd.MM.yyyy"), score, color % 2 == 0 ? Colors.White : Colors.AliceBlue));
+                color++;
+            }
         }
     }
 

@@ -117,7 +117,18 @@ namespace HighScore.Data
                 if(values.Count > 1)
                     score2 = values[1];
 
-                yield return new ResultScore(group.Key.Name, score1, score2);
+                yield return new ResultScore(DateTime.Now,group.Key.Name, score1, score2);
+            }
+        }
+
+        public IEnumerable<ResultScore> GetDayScores() {
+            var scores = session.QueryOver<Score>().JoinQueryOver<Player>(s => s.Player).List();
+
+            var groups = scores.GroupBy(s => s.Date);
+
+            foreach (var group in groups) {
+                var score = group.OrderByDescending(s => s.Values.Select(v => v.Value).Max()).First();
+                yield return new ResultScore(score.Date, score.Player.Name, score.Values.Select(v => v.Value).Max(), score.Values.Select(v => v.Value).Min());
             }
         }
     }
