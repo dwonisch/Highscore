@@ -37,6 +37,15 @@ namespace HighScore.Data
 
         }
 
+        public void ClearData()
+        {
+            var playersWithScores = session.QueryOver<Score>().Select(s => s.Player).List<Player>().Distinct().ToList();
+            var allPlayers = session.QueryOver<Player>().List();
+
+            Delete(allPlayers.Except(playersWithScores).ToList()); //Delete all players that didn't have any scores
+            Delete(session.QueryOver<Score>().List()); // Delete all scores to start with a new database
+        }
+
         private ISessionFactory sessionFactory;
         private ISession session;
 
@@ -62,16 +71,26 @@ namespace HighScore.Data
         }
 
         public void DeleteScores(IEnumerable<Score> scores) {
-            if (!scores.Any())
+            Delete(scores);
+        }
+
+        private void Delete(IEnumerable<object> objects)
+        {
+            if (!objects.Any())
                 return;
-            using (var transaction = session.BeginTransaction()) {
-                try {
-                    foreach (var score in scores) {
-                        session.Delete(score);
+            using (var transaction = session.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var o in objects)
+                    {
+                        session.Delete(o);
                     }
 
                     transaction.Commit();
-                } catch {
+                }
+                catch
+                {
                     transaction.Rollback();
                     throw;
                 }

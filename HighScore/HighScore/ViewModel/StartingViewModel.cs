@@ -27,6 +27,7 @@ namespace HighScore.ViewModel {
         private void DownloadDatabase() {
             WebClient request = new WebClient();
             request.Credentials = new NetworkCredential("u52287998-dart", "dartturnier");
+ 
             byte[] fileData = request.DownloadData("ftp://www.woni.at/database.db");
 
             if (File.Exists("database.db"))

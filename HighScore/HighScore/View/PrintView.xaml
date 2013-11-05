@@ -34,7 +34,7 @@
                                 <flowdoc:BindableRun BoundText="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}"/>
                             </Paragraph>
                             <Paragraph FontSize="0.4cm">
-                                <Run>www.dart-gosdorf.at</Run>
+                                <Run>www.oekbdart.at</Run>
                             </Paragraph>
                         </TableCell>
                         <TableCell>

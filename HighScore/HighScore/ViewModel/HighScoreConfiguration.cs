@@ -3,8 +3,8 @@
 namespace HighScore.ViewModel {
     public class HighScoreConfiguration {
         public HighScoreConfiguration() {
-            StartDate = new DateTime(2012, 11, 7).Date;
-            EndDate = new DateTime(2012, 12, 14).Date;
+            StartDate = new DateTime(2013, 11, 5).Date;
+            EndDate = new DateTime(2013, 12, 13).Date;
         }
 
         public DateTime StartDate { get; set; }

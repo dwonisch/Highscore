@@ -68,7 +68,7 @@ namespace HighScore.ViewModel {
         }
 
         private static void CreateHTML(PrintViewModel print, FileStream stream) {
-            stream.WriteString(string.Format("<html><head><title>Dartturnier 2012 - {0}</title>", print.Group));
+            stream.WriteString(string.Format("<html><head><title>Dartturnier 2013 - {0}</title>", print.Group));
             stream.WriteString(@"<style>
 
 #col1 {

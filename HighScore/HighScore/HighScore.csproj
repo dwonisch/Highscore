@@ -27,12 +27,12 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://ftp.dart-gosdorf.at/</InstallUrl>
     <TargetCulture>de</TargetCulture>
-    <ProductName>Highscore 2012</ProductName>
+    <ProductName>Highscore 2013</ProductName>
     <PublisherName>Highscore</PublisherName>
     <SuiteName>Highscore</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

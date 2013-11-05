@@ -9,7 +9,7 @@
     
     <property name="Date" />
     <property name="Count" />
-    <many-to-one name="Player" cascade="all" />
+    <many-to-one name="Player" />
     <bag name="Values" cascade="all" inverse="true">
       <key column="Score" />
       <one-to-many class="ScoreValue" />
