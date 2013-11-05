@@ -1,5 +1,7 @@
 ﻿using HighScore.Data;
+using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 
 namespace HighScore {
     /// <summary>

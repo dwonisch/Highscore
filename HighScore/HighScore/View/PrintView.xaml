@@ -49,7 +49,7 @@
                 <flowdoc:ItemsContent.ItemsPanel>
                     <DataTemplate>
                         <flowdoc:Fragment VerticalAlignment="Center">
-                            <Table Margin="0" Padding="25" CellSpacing="0">
+                            <Table Margin="0" Padding="25,5,25,5" CellSpacing="0">
                                 <Table.Columns>
                                     <TableColumn Width="3cm" />
                                     <TableColumn />
@@ -68,22 +68,22 @@
                                 <TableRow.Background>
                                     <SolidColorBrush Color="{Binding Background}" />
                                 </TableRow.Background>
-                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="1,1,0,1" TextAlignment="Center">
+                                <TableCell Padding="7,1,7,1" BorderBrush="Gray" BorderThickness="1,1,0,1" TextAlignment="Center">
                                     <Paragraph>
                                         <flowdoc:BindableRun BoundText="{Binding Place}" />
                                     </Paragraph>
                                 </TableCell>
-                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,0,1">
+                                <TableCell Padding="7,1,7,1" BorderBrush="Gray" BorderThickness="0,1,0,1">
                                     <Paragraph>
                                         <flowdoc:BindableRun BoundText="{Binding Player}" />
                                     </Paragraph>
                                 </TableCell>
-                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,0,1" TextAlignment="Center">
+                                <TableCell Padding="7,1,7,1" BorderBrush="Gray" BorderThickness="0,1,0,1" TextAlignment="Center">
                                     <Paragraph>
                                         <flowdoc:BindableRun BoundText="{Binding FirstScore}"/>
                                     </Paragraph>
                                 </TableCell>
-                                <TableCell Padding="7,2,7,2" BorderBrush="Gray" BorderThickness="0,1,1,1" TextAlignment="Center">
+                                <TableCell Padding="7,1,7,1" BorderBrush="Gray" BorderThickness="0,1,1,1" TextAlignment="Center">
                                     <Paragraph>
                                         <flowdoc:BindableRun BoundText="{Binding SecondScore}"/>
                                     </Paragraph>

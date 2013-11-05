@@ -37,6 +37,9 @@
                 <Button Command="{Binding PrintFemale}">Gesamtauswertung Damen</Button>
                 <Button Command="{Binding PrintDay}">Tagesauswertung</Button>
                 <Button Command="{Binding Upload}">Upload</Button>
+                <Button Command="{Binding Shots}">Turnierwertung</Button>
+                <Button Command="{Binding ShotsPerPlayer}">Spielerwertung</Button>
+                <Button Command="{Binding PrintChildren}">Gesamtauswertung Kinder</Button>
             </StackPanel>
             <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
         </Grid>

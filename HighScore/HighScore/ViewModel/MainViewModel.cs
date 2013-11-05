@@ -97,8 +97,8 @@ namespace HighScore.ViewModel {
 }
 
 </style></head><body>");
-            stream.WriteString("<div style=\"  width: 25em;  margin-left: auto;  margin-right: auto;\">");
-            stream.WriteString(@"<div>");
+            stream.WriteString(string.Format("<div style=\"width: 25em; float:left; position: relative;\"><h3>{0}</h3></div><div style=\"float:right; width=400px;\"><p>powered by:</p><img src=\"logoruki.png\" /></div>", WebUtility.HtmlEncode("ÖKB Gosdorf Dartturnier")));
+            stream.WriteString(@"<div style=""float:left; width: 30em; margin-left: auto;  margin-right: auto;""><div>");
             stream.WriteString(@"<a href=""index.html"">Tagessieger</a><span> </span>");
             stream.WriteString(@"<a href=""men.html"">Herren</a><span> </span>");
             stream.WriteString(@"<a href=""women.html"">Damen</a><p /><p />");
@@ -159,9 +159,12 @@ namespace HighScore.ViewModel {
 
         private ICommand SaveCommand;
         private ICommand PrintMaleCommand;
+        private ICommand PrintChildrenCommand;
         private ICommand PrintFemaleCommand;
         private ICommand PrintDayCommand;
         private ICommand UploadCommand;
+        private ICommand ShotsCommand;
+        private ICommand ShotsPerPlayerCommand;
         private RelayCommand<CancelEventArgs> ClosingCommand;
 
         public ICommand MainView {
@@ -181,14 +184,16 @@ namespace HighScore.ViewModel {
                 return SaveCommand;
             }
         }
-        public ICommand PrintMale { get {
-            if (PrintMaleCommand == null) {
-                PrintMaleCommand = new RelayCommand(new Action(() => {
-                    CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
-                }));
+        public ICommand PrintMale {
+            get {
+                if (PrintMaleCommand == null) {
+                    PrintMaleCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
+                    }));
+                }
+                return PrintMaleCommand;
             }
-            return PrintMaleCommand;
-        } }
+        }
         public ICommand PrintFemale {
             get {
                 if (PrintFemaleCommand == null) {
@@ -199,6 +204,17 @@ namespace HighScore.ViewModel {
                 return PrintFemaleCommand;
             }
         }
+        public ICommand PrintChildren {
+            get {
+                if (PrintChildrenCommand == null) {
+                    PrintChildrenCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintViewModel(Database.Value.GetChildrenHighscores(), "Kinder");
+                    }));
+                }
+                return PrintChildrenCommand;
+            }
+        }
+
         public ICommand PrintDay {
             get {
                 if (PrintDayCommand == null) {
@@ -209,66 +225,95 @@ namespace HighScore.ViewModel {
                 return PrintDayCommand;
             }
         }
+
+        public ICommand Shots {
+            get {
+                if (ShotsCommand == null) {
+                    ShotsCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintDayViewModel(Database.Value.GetDayShots());
+                    }));
+                }
+                return ShotsCommand;
+            }
+        }
+
+        public ICommand ShotsPerPlayer {
+            get {
+                if (ShotsPerPlayerCommand == null) {
+                    ShotsPerPlayerCommand = new RelayCommand(new Action(() => {
+                        CurrentViewModel = new PrintViewModel(Database.Value.GetPlayerShots(), "Schützen");
+                    }));
+                }
+                return ShotsPerPlayerCommand;
+            }
+        }
+
         public ICommand Upload {
             get {
+
                 if (UploadCommand == null) {
                     UploadCommand = new RelayCommand(new Action(() => {
 
-                        if (!Directory.Exists("html"))
-                            Directory.CreateDirectory("html");
-                        if (!File.Exists("html\\index.html"))
-                            File.Create("html\\index.html");
-                        if (File.Exists("html\\men.html"))
-                            File.Delete("html\\men.html");
-                        if (!File.Exists("html\\women.html"))
-                            File.Create("html\\women.html");
+                        try {
+                            if (!Directory.Exists("html"))
+                                Directory.CreateDirectory("html");
+                            if (!File.Exists("html\\index.html"))
+                                File.Create("html\\index.html");
+                            if (File.Exists("html\\men.html"))
+                                File.Delete("html\\men.html");
+                            if (!File.Exists("html\\women.html"))
+                                File.Create("html\\women.html");
 
 
 
 
-                        using (var stream = File.Create("html\\men.html")) {
-                            var print = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
-                            CreateHTML(print, stream);
+                            using (var stream = File.Create("html\\men.html")) {
+                                var print = new PrintViewModel(Database.Value.GetHighscores(false), "Herren");
+                                CreateHTML(print, stream);
+                            }
+                            UploadDatabase("men.html");
+
+                            using (var stream = File.Create("html\\women.html")) {
+                                var print = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
+                                CreateHTML(print, stream);
+
+                            }
+                            UploadDatabase("women.html");
+
+                            using (var stream = File.Create("html\\index.html")) {
+                                var print = new PrintDayViewModel(Database.Value.GetDayScores());
+                                CreateHTML(print, stream);
+
+                            }
+                            UploadDatabase("index.html");
+                        } catch (Exception ex) {
+                            MessageBox.Show(ex.Message);
                         }
-                        UploadDatabase("men.html");
-
-                        using (var stream = File.Create("html\\women.html")) {
-                            var print = new PrintViewModel(Database.Value.GetHighscores(true), "Damen");
-                            CreateHTML(print, stream);
-
-                        }
-                        UploadDatabase("women.html");
-
-                        using (var stream = File.Create("html\\index.html")) {
-                            var print = new PrintDayViewModel(Database.Value.GetDayScores());
-                            CreateHTML(print, stream);
-
-                        }
-                        UploadDatabase("index.html");
-
                     }));
                 }
                 return UploadCommand;
             }
         }
-        public RelayCommand<CancelEventArgs> Closing { get {
-            if (ClosingCommand == null) {
-                ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
-                    if (!canClose) {
-                        Database.Value.SaveSettings(settings);
+        public RelayCommand<CancelEventArgs> Closing {
+            get {
+                if (ClosingCommand == null) {
+                    ClosingCommand = new RelayCommand<CancelEventArgs>(new Action<CancelEventArgs>((args) => {
+                        if (!canClose) {
+                            Database.Value.SaveSettings(settings);
 
-                        var viewmodel = new ClosingViewModel();
-                        viewmodel.Completed += viewmodel_Completed;
-                        CurrentViewModel = viewmodel;
+                            var viewmodel = new ClosingViewModel();
+                            viewmodel.Completed += viewmodel_Completed;
+                            CurrentViewModel = viewmodel;
 
-                        Task.Factory.StartNew(() => viewmodel.Execute());
+                            Task.Factory.StartNew(() => viewmodel.Execute());
 
-                        args.Cancel = true;
-                    }
-                }));
+                            args.Cancel = true;
+                        }
+                    }));
+                }
+                return ClosingCommand;
             }
-            return ClosingCommand;
-        } }
+        }
     }
 
     public static class StreamExtensions {

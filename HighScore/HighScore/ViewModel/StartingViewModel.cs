@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HighScore.ViewModel {
     public class StartingViewModel : SaveableViewModel {
@@ -24,13 +25,12 @@ namespace HighScore.ViewModel {
         public event EventHandler Completed;
 
         private void DownloadDatabase() {
-            if (File.Exists("database.db"))
-                File.Delete("database.db");
-
             WebClient request = new WebClient();
             request.Credentials = new NetworkCredential("u52287998-dart", "dartturnier");
             byte[] fileData = request.DownloadData("ftp://www.woni.at/database.db");
 
+            if (File.Exists("database.db"))
+                File.Delete("database.db");
             FileStream file = File.Create("database.db");
             file.Write(fileData, 0, fileData.Length);
             file.Close();

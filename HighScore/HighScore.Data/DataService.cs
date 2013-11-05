@@ -121,6 +121,25 @@ namespace HighScore.Data
             }
         }
 
+        public IEnumerable<ResultScore> GetChildrenHighscores() {
+            var scores = session.QueryOver<Score>().JoinQueryOver<Player>(s => s.Player).Where(p => p.Child).List();
+
+            var groups = scores.GroupBy(s => s.Player, s => s.Values.Select(v => v.Value));
+
+            foreach (var group in groups) {
+                var values = group.SelectMany(s => s).OrderByDescending(s => s).Take(2).ToList();
+                int score1 = 0;
+                int score2 = 0;
+
+                if (values.Count > 0)
+                    score1 = values[0];
+                if (values.Count > 1)
+                    score2 = values[1];
+
+                yield return new ResultScore(DateTime.Now, group.Key.Name, score1, score2);
+            }
+        }
+
         public IEnumerable<ResultScore> GetDayScores() {
             var scores = session.QueryOver<Score>().JoinQueryOver<Player>(s => s.Player).List();
 
@@ -130,6 +149,28 @@ namespace HighScore.Data
                 var score = group.OrderByDescending(s => s.Values.Select(v => v.Value).Max()).First();
                 yield return new ResultScore(score.Date, score.Player.Name, score.Values.Select(v => v.Value).Max(), score.Values.Select(v => v.Value).Min());
             }
+        }
+
+        public IEnumerable<ResultScore> GetPlayerShots() {
+            var scores = session.QueryOver<Score>().JoinQueryOver<Player>(s => s.Player).List();
+
+            var groups = scores.GroupBy(s => s.Player);
+
+            foreach (var group in groups) {
+                yield return new ResultScore(DateTime.Now, group.Key.Name, group.Sum(g => g.Count), group.Select(g => g.Date).Distinct().Count());
+            }
+        }
+
+        public IEnumerable<ResultScore> GetDayShots() {
+            var scores = session.QueryOver<Score>().List();
+
+            var groups = scores.GroupBy(s => s.Date);
+
+            foreach (var group in groups) {
+                yield return new ResultScore(group.Key, string.Empty, group.Sum(g => g.Count), group.Select(g => g.Player).Distinct().Count());
+            }
+
+            yield return new ResultScore(DateTime.Now, "Gesamt:", groups.SelectMany(g => g.Select(p => p.Count)).Sum(), groups.SelectMany(g => g.Select(p => p.Player)).Distinct().Count());
         }
 
         public Settings GetSettings() {
